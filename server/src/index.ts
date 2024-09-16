@@ -6,7 +6,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 require('dotenv').config();
 
-import router from './router';
+import router from './routes/index.route';
 
 const app = express();
 
@@ -28,7 +28,6 @@ server.listen(8080, () => {
 });
 
 
-// const MONGO_URL = 'mongodb+srv://minhhoa:minhhoa@cluster0.o1fxe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 const MONGO_URL = process.env.MONGO_URL
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
