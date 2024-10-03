@@ -28,7 +28,7 @@ server.listen(8080, () => {
 });
 
 
-const MONGO_URL = "mongodb+srv://minhhoa:minhhoa@cluster0.o1fxe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const MONGO_URL = process.env.MONGO_URL;
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 
