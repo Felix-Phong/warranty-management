@@ -5,6 +5,7 @@ import users from './users.route';
 import suppliers from './supplier.route';
 import products from './product.route';
 import orders from './order.route';
+import customers from './customer.route';
 
 const router = express.Router();
 
@@ -19,6 +20,8 @@ export default (): express.Router => {
     products(router);
 
     orders(router);
+
+    customers(router);
 
     return router;
 } 
