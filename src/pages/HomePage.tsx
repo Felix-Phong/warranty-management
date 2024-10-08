@@ -1,21 +1,21 @@
 // src/pages/HomePage.tsx
 import React from 'react';
-import Layout from '../components/Layout';
-import { Container, Jumbotron, Button } from 'react-bootstrap';
+import Header from '../components/Header';
 
 const HomePage: React.FC = () => {
     return (
-        <Layout>
-            <Jumbotron fluid className="text-center mt-5">
-                <Container>
-                    <h1>Welcome to the Warranty Management System</h1>
-                    <p>
-                        Manage product warranties, view products, and track warranty history easily.
-                    </p>
-                    <Button href="/products" variant="primary">View Products</Button>
-                </Container>
-            </Jumbotron>
-        </Layout>
+        <div>
+            <Header />
+            <main className="container mt-4">
+                <h2>Welcome to the 12DHTH_TD</h2>
+                <p>Thành Viên Nhóm.</p>
+                <ul >
+                    <li>Nguyễn Đăng Triều</li>  
+                    <li>Trần Minh Hòa</li>
+                    <li>Hoàng Quốc Phong</li>
+                </ul>
+            </main>
+        </div>
     );
 };
 

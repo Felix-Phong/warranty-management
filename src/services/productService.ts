@@ -13,6 +13,19 @@ export const getAllProducts = async (): Promise<Product[]> => {
     }
 };
 
+export const getProductById = async (id: string): Promise<Product> => {
+    if (!id) {
+        throw new Error('Product ID must be provided');
+    }
+
+    try {
+        const response = await axios.get<Product>(`${API_URL}/${id}`); // Specify the expected response type
+        return response.data;
+    } catch (error) {
+        handleError(error);
+        throw new Error('Failed to fetch product');
+    }
+};
 
 export const createProduct = async (product: Product): Promise<Product> => {
     try {

@@ -15,7 +15,7 @@ const Login: React.FC = () => {
         try {
             const response = await loginUser(username, password);
             // Nếu loginUser thành công, chuyển hướng đến trang sản phẩm
-            navigate('/products'); 
+            navigate('/'); 
         } catch (error) {
             if (error instanceof Error) {
                 setErrorMessage(error.message); // Nếu error là kiểu Error, thiết lập thông báo lỗi
