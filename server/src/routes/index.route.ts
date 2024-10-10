@@ -6,6 +6,8 @@ import suppliers from './supplier.route';
 import products from './product.route';
 import orders from './order.route';
 import customers from './customer.route';
+import warrantyHistorys from './warrantyHistory.route';
+import warrantyRegistrations from './warrantyRegistration.route';
 
 const router = express.Router();
 
@@ -22,6 +24,10 @@ export default (): express.Router => {
     orders(router);
 
     customers(router);
+
+    warrantyHistorys(router);
+
+    warrantyRegistrations(router);
 
     return router;
 } 

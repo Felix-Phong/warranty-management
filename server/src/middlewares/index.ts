@@ -27,26 +27,26 @@ export const isOwner = async (req: express.Request, res: express.Response, next:
 }
 
 export const isAuthenticated = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    try {
-        const sessionToken = req.cookies['MINHHOA-AUTH']; // initial in login controller
-        if (!sessionToken) {
-            return res.sendStatus(403);
-        }
+    // try {
+    //     const sessionToken = req.cookies['MINHHOA-AUTH']; // initial in login controller
+    //     if (!sessionToken) {
+    //         return res.sendStatus(403);
+    //     }
 
-        const existingUser = await UserModel.findOne({
-            'authentication.sessionToken': sessionToken,
-        });
+    //     const existingUser = await UserModel.findOne({
+    //         'authentication.sessionToken': sessionToken,
+    //     });
 
-        if (!existingUser) {
-            return res.sendStatus(403);
-        }
+    //     if (!existingUser) {
+    //         return res.sendStatus(403);
+    //     }
 
-        merge(req, {identity: existingUser})
+    //     merge(req, {identity: existingUser})
 
         return next();
 
-    } catch (error) {
-        console.log(error);
-        return res.sendStatus(400);
-    }
+    // } catch (error) {
+    //     console.log(error);
+    //     return res.sendStatus(400);
+    // }
 }
