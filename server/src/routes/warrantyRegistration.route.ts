@@ -1,12 +1,18 @@
 import express from 'express';
 
-import { getCustomerQueryParams, createWarrantyRegistration, deleteWarrantyRegistrationById, getAllWarrantyRegistrations, getWarrantyRegistrationById, updateWarrantyRegistrationById } 
-from '../controllers/warrantyRegistration.controller';
+import { 
+    getCustomerQueryParams, createWarrantyRegistration, deleteWarrantyRegistrationById, 
+    getAllWarrantyRegistrations, getWarrantyRegistrationById, updateWarrantyRegistrationById,
+    getProductsByCustomerId
+} from '../controllers/warrantyRegistration.controller';
+
 
 import { isAuthenticated } from '../middlewares';
 
 export default (router: express.Router) => {
     router.get('/warrantyRegistrations/getCustomerQueryParams', isAuthenticated, getCustomerQueryParams);
+
+    router.get('/warrantyRegistrations/getProductsByCustomerId/:id', isAuthenticated, getProductsByCustomerId);
 
     router.post('/warrantyRegistrations', isAuthenticated, createWarrantyRegistration);
 
