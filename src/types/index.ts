@@ -30,3 +30,26 @@ export interface Product {
     updatedAt: string; // Update timestamp
     __v: number; // Version key for MongoDB
 }
+// src/types/index.ts
+export interface WarrantyRegistration {
+    _id?: string; // Optional for new registrations
+    product_id: string; // Using the API field names
+    customer_id: string;
+    received_date: string;
+    current_status: string;
+    notes?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+
+export interface Order {
+    _id: string;
+    products: Product[];
+    total_cost: number;
+    customer_id: string;
+    purchase_date: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+}
