@@ -1,0 +1,71 @@
+/* src/pages/Login.css */
+
+body {
+    background-color: #f7f7f7; /* Light background color */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    animation: fadeIn 0.5s ease; /* Animation for the container */
+}
+
+.login-form {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 300px; /* Fixed width */
+    text-align: center; /* Center text */
+    transition: transform 0.3s ease; /* Animation for hover effect */
+}
+
+.login-form:hover {
+    transform: scale(1.02); /* Scale effect on hover */
+}
+
+input {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin: 10px 0; /* Margin between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s ease; /* Animation for border color */
+}
+
+input:focus {
+    border-color: #007bff; /* Highlight border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+button {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin-top: 10px; /* Space above button */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Animation for button hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.error-message {
+    color: red; /* Error message color */
+    margin-top: 10px; /* Space above error message */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

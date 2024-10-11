@@ -1,14 +1,18 @@
+// src/components/PrivateRoute.tsx
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
-const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const token = localStorage.getItem('authToken');
+interface PrivateRouteProps {
+    element: React.ReactNode; // The component to render
+}
 
-    if (!token) {
-        return <Navigate to="/login" replace />;
-    }
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
+    const { user } = useAuth(); // Get user from Auth context
 
-    return <>{children}</>; // Render the children components if the user is authenticated
+    // Check if the user is authenticated (active)
+    return user && user.active ? <>{element}</> : <Navigate to="/login" />; // Redirect to login if not authenticated
 };
 
 export default PrivateRoute;

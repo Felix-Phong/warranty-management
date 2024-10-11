@@ -1,0 +1,44 @@
+/* Notification container */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: slideIn 0.5s forwards, fadeOut 0.5s 3.5s forwards; /* Animation for appearance and disappearance */
+}
+
+/* Success message style */
+.success-message {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+/* Error message style */
+.error-message {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade out animation */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}

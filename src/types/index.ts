@@ -40,6 +40,7 @@ export interface WarrantyRegistration {
     notes?: string;
     createdAt?: string;
     updatedAt?: string;
+    _staff_id?: string;  // Optional for new registrations
 }
 
 
@@ -52,4 +53,11 @@ export interface Order {
     createdAt: string;
     updatedAt: string;
     __v: number;
+}
+interface User {
+    id: string;
+    email: string;
+    full_name: string;
+    role: string;
+    active: boolean; // Thêm thuộc tính active
 }

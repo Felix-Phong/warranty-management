@@ -1,0 +1,118 @@
+/* src/components/CustomerList.css */
+
+/* General Layout */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 32px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Bar */
+.input-group {
+    margin-bottom: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    border-color: #0056b3;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transition: 0.3s;
+}
+
+.btn-warning, .btn-danger {
+    border: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 20px;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transition: 0.3s;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+    transition: 0.3s;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+/* No Customers Found */
+.text-center {
+    color: #6c757d;
+}
