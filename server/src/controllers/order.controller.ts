@@ -1,7 +1,26 @@
-import { merge } from 'lodash';
 import express from 'express';
 
 import OrderModel from '../Models/order.model';
+
+export const filterOrderByCreatedDay = async (req:express.Request, res:express.Response) => {
+    const find: { [key: string]: any } = {};
+    if (req.query.purchaseDateStart && req.query.purchaseDateEnd) {
+        const purchaseDateStart = new Date(req.query.purchaseDateStart as string);
+        const purchaseDateEnd = new Date(req.query.purchaseDateEnd as string);
+
+        find["purchase_date"] = {
+            $gte: purchaseDateStart,  
+            $lte: purchaseDateEnd     
+        };
+    }
+
+    try {
+        const orders = await OrderModel.find(find);
+        res.status(200).json(orders);
+    } catch (error) {
+        return res.status(500).json({ message: 'Error fetching products', error });
+    }
+}
 
 export const createOrder = async(req:express.Request,res:express.Response) =>{
     try
