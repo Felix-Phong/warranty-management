@@ -7,6 +7,26 @@ import OrderModel from '../Models/order.model';
 import ProductModel from '../Models/product.model';
 
 
+export const filterRegistrationByReceivedDate = async (req: express.Request, res: express.Response) => {
+    const find: { [key: string]: any } = {};
+    if (req.query.receivedDateStart && req.query.receivedDateEnd) {
+        const receivedDateStart = new Date(req.query.receivedDateStart as string);
+        const receivedDateEnd = new Date(req.query.receivedDateEnd as string);
+
+        find["received_date"] = {
+            $gte: receivedDateStart,
+            $lte: receivedDateEnd
+        };
+    }
+
+    try {
+        const registrations = await warrantyRegistrationModel.find(find);
+        res.status(200).json(registrations);
+    } catch (error) {
+        return res.status(500).json({ message: 'Error fetching products', error });
+    }
+}
+
 export const getProductsByCustomerId = async (req: express.Request, res: express.Response) => {
     const customerId = req.params.id;
 
