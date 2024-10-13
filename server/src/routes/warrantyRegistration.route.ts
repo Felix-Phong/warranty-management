@@ -10,6 +10,7 @@ import {
 import { isAuthenticated } from '../middlewares';
 
 export default (router: express.Router) => {
+
     router.get('/warrantyRegistrations/getCustomerQueryParams', isAuthenticated, getCustomerQueryParams);
 
     router.get('/warrantyRegistrations/getProductsByCustomerId/:id', isAuthenticated, getProductsByCustomerId);

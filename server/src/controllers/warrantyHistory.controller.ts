@@ -5,9 +5,9 @@ import WarrantyRegistrationModel from '../Models/warrantyRegistration.model';
 import { UserModel } from '../Models/user.model';
 
 // Định nghĩa kiểu cho status để sử dụng lại
-type Status = "pending_check" | "under_repair" | "returned_to_customer" | "sent_to_manufacturer";
+type Status = "under_repair" | "returned_to_customer" | "sent_to_manufacturer";
 
-export const confirmWarrantyRegistration = async (req: express.Request, res: express.Response) {
+export const confirmWarrantyRegistration = async (req: express.Request, res: express.Response) => {
     const techId = req.params.techId;
     const warrantyRegisID = req.params.warrantyRegisID;
     const newStatus = req.query.newStatus;
