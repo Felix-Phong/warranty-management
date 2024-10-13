@@ -90,7 +90,7 @@ export const register = async (req: express.Request, res: express.Response) => {
         const newUser = new UserModel({
             email,
             full_name,
-            role: role || 'user', // Sử dụng vai trò mặc định nếu không có vai trò được chỉ định
+            role: role || 'staff', // Sử dụng vai trò mặc định nếu không có vai trò được chỉ định
             active: false, // Đặt active mặc định là false khi đăng ký
             authentication: {
                 salt,

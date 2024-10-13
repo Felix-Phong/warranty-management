@@ -14,8 +14,8 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['user', 'admin'], // Các vai trò có thể có
-        default: 'user' // Vai trò mặc định
+        enum: ['staff', 'staff technical', 'admin'], // Các vai trò có thể có
+        default: 'staff' // Vai trò mặc định
     },
     authentication: {
         salt: String,
