@@ -12,6 +12,25 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
     }
 };
 
+export const getUserById = async (req: express.Request, res: express.Response) => {
+    try {
+        if(!req.params.id) {
+            return res.status(400).json({message: 'Invalid id'});
+        }
+
+        const user = await UserModel.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        return res.status(200).json(user);
+    } catch (error) {
+        console.log(error);
+        return res.status(500);
+    }
+}
+
 export const deleteUser = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
