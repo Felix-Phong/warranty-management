@@ -19,8 +19,14 @@ export const createWarrantyHistory = async (req: express.Request, res: express.R
 
 export const getAllWarrantyHistorys = async (req: express.Request, res: express.Response) => {
     try {
-        const warrantyHistorys = await warrantyHistoryModel.find({});
-
+        const warrantyHistorys = await warrantyHistoryModel.find({})
+        .populate('registration_id') // Populate thông tin đăng ký bảo hành
+        .populate('product_id') // Populate chỉ trường 'name' của sản phẩm
+        .populate('technician_id') // Populate chỉ trường 'full_name' của kỹ thuật viên
+        .populate({
+            path: 'status_changes.changed_by', // Populate thông tin người thay đổi trạng thái
+            select: 'full_name' // Chỉ lấy trường full_name
+        })
         return res.status(200).json(warrantyHistorys);
     } catch (error) {
         console.log(error);
