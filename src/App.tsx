@@ -12,6 +12,7 @@ import CustomerManagement from './pages/CustomerManagement';
 import WarrantyRegistration from './pages/WarrantyRegistration';
 import WarrantyRegistrationProduct from './pages/WarrantyRegistrationProduct';
 import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
+import WarrantyHistoryList from './pages/WarrantyHistory';
 
 const App: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
                     <Route path="/orders" element={<PrivateRoute element={<OrderList />} />} />
                     <Route path="/customers" element={<PrivateRoute element={<CustomerManagement />} />} />
                     <Route path="/warrantys" element={<PrivateRoute element={<WarrantyRegistration />} />} />
+                    <Route path="/warrantyHistorys" element = {<PrivateRoute element={<WarrantyHistoryList/>}/>} />
                     <Route path="/products" element={<PrivateRoute element={<ProductListPage />} />} />
                     <Route path="/products/:id" element={<PrivateRoute element={<ProductDetail />} />} />
                     <Route path="/warranty-registration/:customerId" element={<PrivateRoute element={<WarrantyRegistrationProduct />} />} />

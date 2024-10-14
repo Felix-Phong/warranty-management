@@ -23,6 +23,7 @@ const Header: React.FC = () => {
                     <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
                     <Nav.Link as={Link} to="/customers">Customers</Nav.Link>
                     <Nav.Link as={Link} to="/warrantys">Warrantys</Nav.Link>
+                    <Nav.Link as={Link} to="/warrantyHistorys">WarrantyHistory</Nav.Link>
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     {user && user.active ? ( // Kiểm tra trạng thái active
                         <>
