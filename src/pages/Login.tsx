@@ -22,7 +22,7 @@ const Login: React.FC = () => {
         try {
             const userData = await loginUser(email, password); // Call loginUser function
             if (userData.active) { // Check if user is active
-                setUser({ id: userData.id, email: userData.email, active: userData.active }); // Set user in context
+                setUser({ id: userData.id, email: userData.email, role: userData.role ,active: userData.active }); // Set user in context
                 navigate('/'); // Redirect to home page
             } else {
                 setErrorMessage('Your account is not active.'); // Handle inactive account case

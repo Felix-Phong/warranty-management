@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const Header: React.FC = () => {
-    const { user, logout } = useAuth(); // Truy cập user và logout từ Auth context
+    const { user, logout } = useAuth(); // Access user and logout from Auth context
 
     const handleLogout = () => {
-        logout(); // Gọi hàm logout
+        logout(); // Call logout function
     };
 
     return (
@@ -20,19 +20,33 @@ const Header: React.FC = () => {
                 <Nav className="ml-auto">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/products">Products</Nav.Link>
-                    <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
-                    <Nav.Link as={Link} to="/customers">Customers</Nav.Link>
-                    <Nav.Link as={Link} to="/warrantys">Warrantys</Nav.Link>
-                    <Nav.Link as={Link} to="/warrantyHistorys">WarrantyHistory</Nav.Link>
+                    
+                    {/* Render Orders link only for staff and admin */}
+                    {(user && user.active && (user.role === 'staff' || user.role === 'admin')) && (
+                        <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
+                    )}
+                    
+                    {/* Render Customers link only for admin */}
+                    {user && user.active && (user.role === 'admin' ||user.role === 'staff')&& (
+                        <Nav.Link as={Link} to="/customers">Customers</Nav.Link>
+                    )}
+                    
+                    {/* Render Warrantys link for all roles */}
+                    {user && user.active && (
+                        <Nav.Link as={Link} to="/warrantys">Warrantys</Nav.Link>
+                    )}
+                    
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
-                    {user && user.active ? ( // Kiểm tra trạng thái active
+
+                    {user && user.active ? ( // Check if the user is active
                         <>
-                            <Nav.Link disabled>Welcome, {user.email}</Nav.Link> {/* Hiển thị email nếu người dùng đã hoạt động */}
-                            <Nav.Link disabled>ID: {user.id}</Nav.Link> {/* Hiển thị ID người dùng */}
-                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link> {/* Thêm link đăng xuất */}
+                            <Nav.Link disabled>Welcome, {user.email}</Nav.Link> {/* Display email if user is active */}
+                            <Nav.Link disabled>ID: {user.id}</Nav.Link> {/* Display user ID */}
+                            <Nav.Link disabled>Role: {user.role}</Nav.Link> {/* Display user role */}
+                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link> {/* Add logout link */}
                         </>
                     ) : (
-                        <Nav.Link as={Link} to="/login">Login</Nav.Link> // Hiện link đăng nhập nếu chưa đăng nhập
+                        <Nav.Link as={Link} to="/login">Login</Nav.Link> // Show login link if not logged in
                     )}
                 </Nav>
             </Navbar.Collapse>

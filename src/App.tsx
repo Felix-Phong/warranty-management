@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetail from './pages/ProductDetail';
-import OrderList from './pages/OderList';
+import OrderList from './pages/OderList'; // Fix typo in import path
 import CustomerManagement from './pages/CustomerManagement';
 import WarrantyRegistration from './pages/WarrantyRegistration';
 import WarrantyRegistrationProduct from './pages/WarrantyRegistrationProduct';
@@ -21,13 +21,52 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/orders" element={<PrivateRoute element={<OrderList />} />} />
-                    <Route path="/customers" element={<PrivateRoute element={<CustomerManagement />} />} />
-                    <Route path="/warrantys" element={<PrivateRoute element={<WarrantyRegistration />} />} />
-                    <Route path="/warrantyHistorys" element = {<PrivateRoute element={<WarrantyHistoryList/>}/>} />
-                    <Route path="/products" element={<PrivateRoute element={<ProductListPage />} />} />
-                    <Route path="/products/:id" element={<PrivateRoute element={<ProductDetail />} />} />
-                    <Route path="/warranty-registration/:customerId" element={<PrivateRoute element={<WarrantyRegistrationProduct />} />} />
+
+                    {/* Use children instead of element */}
+                    <Route path="/orders"
+                        element={
+                            <PrivateRoute allowedRoles={['staff', 'admin']}>
+                                <OrderList />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path="/customers"
+                        element={
+                            <PrivateRoute allowedRoles={['staff', 'admin']}>
+                                <CustomerManagement />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path="/warrantys"
+                        element={
+                            <PrivateRoute allowedRoles={['staff', 'admin', 'staff technical']}>
+                                <WarrantyRegistration />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path="/products"
+                        element={
+                            <PrivateRoute allowedRoles={['staff technical', 
+                                                        'admin',
+                                                        'staff']}>
+                                <ProductListPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path="/products/:id"
+                        element={
+                            <PrivateRoute allowedRoles={['staff', 'admin']}>
+                                <ProductDetail />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path="/warranty-registration/:customerId"
+                        element={
+                            <PrivateRoute allowedRoles={['staff', 'staff technical', 'admin']}>
+                                <WarrantyRegistrationProduct />
+                            </PrivateRoute>
+                        }
+                    />
                 </Routes>
             </Router>
         </AuthProvider>

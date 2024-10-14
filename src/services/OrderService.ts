@@ -27,3 +27,17 @@ export const deleteOrderById = async (id: string) => {
     const response = await axios.delete(`${API_URL}/${id}`);
     return response.data;
 };
+export const filterOrdersByDate = async (startDate: string, endDate: string) => {
+    try {
+        const response = await axios.get(API_URL, {
+            params: {
+                purchaseDateStart: startDate,
+                purchaseDateEnd: endDate,
+            },
+        });
+        return response.data; // Return filtered orders
+    } catch (error) {
+        console.error("Error fetching orders by date:", error);
+        return []; // Return an empty array on error
+    }
+};

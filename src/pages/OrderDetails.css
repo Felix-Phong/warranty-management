@@ -1,0 +1,66 @@
+/* src/components/OrderDetails.css */
+
+.order-details {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for more depth */
+    background-color: #ffffff;
+    animation: fadeIn 0.5s ease-in-out; /* Animation for fade in effect */
+    max-width: 600px; /* Limit the width of the order details */
+    margin: 20px auto; /* Center the component */
+}
+
+.order-details h4,
+.order-details h5 {
+    color: #007bff; /* Blue color for headers */
+    margin-bottom: 10px; /* Spacing below headers */
+}
+
+.order-details p {
+    margin: 8px 0;
+    font-size: 14px; /* Slightly smaller font size for readability */
+    line-height: 1.5; /* Increase line height for better readability */
+}
+
+.order-details ul {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0; /* Remove padding */
+}
+
+.order-details li {
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #007bff; /* Border for product items */
+    border-radius: 8px; /* More rounded corners */
+    background-color: #f8f9fa; /* Light background for product items */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    position: relative; /* Position for pseudo-elements */
+}
+
+.order-details li:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3); /* Shadow on hover */
+}
+
+.order-details li:before {
+    content: '';
+    position: absolute;
+    top: 0; /* Position at the top */
+    left: 0;
+    width: 5px; /* Width of the border */
+    height: 100%; /* Full height */
+    background-color: #007bff; /* Blue border on the left */
+    border-radius: 8px 0 0 8px; /* Rounded corners for the left border */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* Slide down effect */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
