@@ -2,6 +2,33 @@ import express from 'express';
 
 import ProductModel from '../Models/product.model';
 
+type CategoryType = 'laptop'| 'chuot'| 'banphim'| 'manhinh'| 'ram'| 'cpu'| 'tainghe';
+
+export const getProductsByCategory = async (req: express.Request, res: express.Response) => {
+    const category = req.params.category;
+
+    const validCategories = ['laptop', 'chuot', 'banphim', 'manhinh', 'ram', 'cpu', 'tainghe'];
+
+    try {
+        if (!category) {
+            return res.status(400).json({message: "Invalid category!"});
+        }
+
+        if (!validCategories.includes(category as CategoryType)) {
+            return res.status(400).json({ message: 'Invalid category value!' });
+        }
+
+        const products = await ProductModel.find({
+            type: category
+        });
+
+        return res.status(201).json({products});
+
+    } catch (error) {
+        return res.status(500).json({ message: 'Error fetching products', error });
+    }
+}
+
 export const createProduct = async (req: express.Request, res: express.Response) => {
     try {
         if (!req.body){
