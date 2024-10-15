@@ -9,6 +9,7 @@ import OrdersPage from './pages/OderList';
 import WarrantyPage from './pages/WarrantyRegistration';
 import LoginPage from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
+import WarrantyHistoryList from './pages/WarrantyHistory';
 
 const AppRoutes: React.FC = () => {
     return (
@@ -63,6 +64,17 @@ const AppRoutes: React.FC = () => {
                         </PrivateRoute>
                     }
                 />
+
+                 {/* Private route: WarrantyHistory page, accessible to 'staff technical' and 'admin' */}
+                                <Route
+                    path="/warrantyHistorys"
+                    element={
+                        <PrivateRoute allowedRoles={['staff technical', 'admin']}>
+                            <WarrantyHistoryList />
+                        </PrivateRoute>
+                    }
+                />
+
 
                 {/* Redirect all other routes to the home page if no access */}
                 <Route path="*" element={<HomePage />} />

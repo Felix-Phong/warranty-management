@@ -31,6 +31,11 @@ const Header: React.FC = () => {
                         <Nav.Link as={Link} to="/customers">Customers</Nav.Link>
                     )}
                     
+                     {/* Render WarrantyHistory link only for admin and staff technical */}
+                     {user && user.active && (user.role === 'admin' ||user.role === 'staff technical')&& (
+                        <Nav.Link as={Link} to="/warrantyHistorys">warrantyHistorys</Nav.Link>
+                    )}
+
                     {/* Render Warrantys link for all roles */}
                     {user && user.active && (
                         <Nav.Link as={Link} to="/warrantys">Warrantys</Nav.Link>

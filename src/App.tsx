@@ -67,6 +67,13 @@ const App: React.FC = () => {
                             </PrivateRoute>
                         }
                     />
+                    <Route path="/warrantyHistorys/"
+                        element={
+                            <PrivateRoute allowedRoles={['admin', 'staff technical']}>
+                                <WarrantyHistoryList/>
+                            </PrivateRoute>
+                        }
+                    />
                 </Routes>
             </Router>
         </AuthProvider>
