@@ -100,6 +100,8 @@ const WarrantyRegistrationPage: React.FC = () => {
                             <p><strong>Status:</strong> {registration.current_status}</p>
                             {registration.notes && <p><strong>Notes:</strong> {registration.notes}</p>}
                             <button onClick={() => handleDeleteClick(registration._id!)} className="delete-button">Xóa</button>
+                            
+                            <button className ='btn btn-success'>Nhận bảo hành</button>
                         </div>
                     ))}
                 </div>

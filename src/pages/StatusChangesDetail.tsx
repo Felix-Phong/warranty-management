@@ -4,17 +4,19 @@ import { Modal, Form, Button } from 'react-bootstrap';
 interface StatusChange {
     status: string;
     actions_taken: string[];
-    changed_by: {
-      _id: string;
-      name: string; // Giả sử kỹ thuật viên có tên
-    };
+    changed_by: string;
     date: string;
     notes?: string;
     _id:string;
 }
+interface User {
+    user_id:string;
+    full_name:string;
+}
 
 interface WarrantyHistory {
     _id?:string,
+    technician_id: User;
     status_changes?:StatusChange[];
 }
 
@@ -25,9 +27,10 @@ interface StatusChangeFormProps {
 
 const StatusChangeForm: React.FC<StatusChangeFormProps> = ({warrantyHistory,onClose}) =>{
     const [formData,setFormData] = useState<WarrantyHistory | null>(null)
-
+    
     useEffect(() =>{
         if(warrantyHistory) {
+            console.log('Warranty History:', warrantyHistory);
             setFormData(warrantyHistory);
         }
     },[warrantyHistory])
@@ -39,28 +42,31 @@ const StatusChangeForm: React.FC<StatusChangeFormProps> = ({warrantyHistory,onCl
             </Modal.Header>
             <Modal.Body>
                 {formData && formData.status_changes && formData.status_changes.length > 0 ? (
-                    <div>
-                         {formData.status_changes.map((change) => (
-                            <div key={change._id}>
-                                <p><strong>Status:</strong> {change.status}</p>
-                                <p><strong>Actions Taken:</strong> {change.actions_taken.join(', ')}</p>
-                                <p><strong>Changed by:</strong> {change.changed_by ? change.changed_by.name : 'Unknown'}</p>
-                                <p><strong>Date:</strong> {new Date(change.date).toLocaleString()}</p>
-                                <p><strong>Notes:</strong> {change.notes || 'No notes'}</p>
-                                <hr />
-                            </div>
-                        ))}
-                    </div>
+                     <div>
+                     {formData.status_changes.map((change) => {
+                         console.log('Change:', change); // Đặt ở đây để in ra từng change
+                         return (
+                             <div key={change._id}>
+                                 <p><strong>Status:</strong> {change.status}</p>
+                                 <p><strong>Actions Taken:</strong> {change.actions_taken.join(', ')}</p>
+                                 <p><strong>Date:</strong> {new Date(change.date).toLocaleString()}</p>
+                                 <p><strong>Notes:</strong> {change.notes || 'No notes'}</p>
+                                 <p><strong>Changed by:</strong> {change.changed_by}</p>
+                                 <hr />
+                             </div>
+                         );
+                     })}
+                 </div>
+                    
                 ): (
                     <p>No data available</p>
                 )
                 }
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant ="secondary" type = "submit">Add action</Button>
-            </Modal.Footer>
         </Modal>
     );
+
+    
 }
 
 

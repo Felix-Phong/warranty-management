@@ -54,7 +54,16 @@ export interface Order {
     updatedAt: string;
     __v: number;
 }
-interface User {
+
+export interface WarrantyHistory {
+    status: string;
+    actions_taken: string[];
+    notes: string;
+    changed_by: { name: string };
+    date: string;
+}
+
+export interface User {
     id: string;
     email: string;
     full_name: string;

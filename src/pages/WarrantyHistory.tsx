@@ -3,6 +3,9 @@
     import {getAllWarrantyHistorys} from '../services/warrantyHistoryService';
     import Header from '../components/Header';
     import StatusChangeForm from './StatusChangesDetail';
+    import ActionForm from './ActionForm';
+    import { useAuth } from '../context/AuthContext';
+    
     interface Product {
         name:string;
         product_id: string;
@@ -23,10 +26,7 @@
     interface StatusChange {
         status: string;
         actions_taken: string[];
-        changed_by: {
-        _id: string;
-        name: string; // Giả sử kỹ thuật viên có tên
-        };
+        changed_by: string
         date: string;
         notes?: string;
         _id:string;
@@ -43,13 +43,17 @@
     }
 
     const WarrantyHistoryList: React.FC = () => {
+        const { user } = useAuth(); 
         const [WarrantyHistories,setWarrantyHistories] = useState<WarrantyHistory[]>([]);
         const [filteredHistories, setFilteredHistories] = useState<WarrantyHistory[]>([]);
         const [selectedHistory,setSelectedHistory] = useState<WarrantyHistory | null>(null);
         const [showModal,setShowModal] = useState<boolean>(false);
         const [startDate,setStartDate] = useState<string>('');
         const [endDate,setEndDate] = useState<string>('');
-
+        const [selectedHistoryId, setSelectedHistoryId] = useState<string | null>(null);
+        const [showActionModal, setShowActionModal] = useState<boolean>(false);
+        
+        
         useEffect(() =>{
             fetchWarrantyHistory();
         },[]);
@@ -61,16 +65,26 @@
         }
         
         const handleShowDetail = (History : WarrantyHistory) => {
-        
-            console.log(History);
+
             setSelectedHistory(History);
             setShowModal(true);
         };
         
-        const handleCloseModal =() =>{
-            setShowModal(false);
-            setSelectedHistory(null);
+
+        const handleActionClick = (history: WarrantyHistory) => {
+            setSelectedHistoryId(history._id);
+            setShowActionModal(true); // Open modal without setting technician ID here
         };
+    
+        const handleCloseModal = () => {
+            setShowActionModal(false); // Đóng modal khi người dùng nhấn đóng
+        };
+    
+        const handleSave = () => {
+            // Refresh dữ liệu hoặc thực hiện hành động khi lưu thành công
+            setShowActionModal(false);
+        };
+    
 
         const filterWarrantyHistories = () => {
             const start = startDate ? new Date(startDate) : null; // Nếu không có ngày bắt đầu, đặt là null
@@ -136,6 +150,7 @@
                             <th>Status Changes</th>
                             <th>Create At</th>
                             <th>Update At</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,7 +164,8 @@
                                 <Button variant="primary" onClick ={() => handleShowDetail(History)}>Detail</Button>
                                 </td>
                                 <td>{History.createdAt}</td>
-                                <td>{History.updatedAt}</td>
+                                <td>{History.updatedAt}</td>    
+                                <td> <Button variant ="secondary" onClick={() => handleActionClick(History)}>Action</Button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -159,7 +175,16 @@
                     <StatusChangeForm
                     warrantyHistory={selectedHistory}
                     onClose={handleCloseModal}
+                    
                 />
+
+                {showActionModal && selectedHistoryId && user && (
+                <ActionForm
+                warrantyRegisID="warrantyRegisID"
+                onClose={handleCloseModal}
+                onSave={handleSave}
+                />
+            )}
             </div>
         )
     };
