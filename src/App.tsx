@@ -69,7 +69,7 @@ const App: React.FC = () => {
                     />
                     <Route path="/warrantyHistorys/"
                         element={
-                            <PrivateRoute allowedRoles={['admin', 'staff technical']}>
+                            <PrivateRoute allowedRoles={['admin', 'staff technical','staff']}>
                                 <WarrantyHistoryList/>
                             </PrivateRoute>
                         }
