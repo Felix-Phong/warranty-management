@@ -16,3 +16,7 @@ export const updateWarrantyHistory = async (warrantyRegisID: string, techId: str
         throw new Error(`Error updating warranty history: ${error}`);
     }
 };
+
+export const moveRegistrationToHistory = async (registrationId: string) => {
+    return axios.post(`/api/warranty-history/move/${registrationId}`);
+  };
