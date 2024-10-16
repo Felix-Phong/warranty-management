@@ -5,6 +5,8 @@ import { Button, Form, Modal } from 'react-bootstrap'; // Import Modal
 import { WarrantyRegistration as WarrantyRegistrationType } from '../types/index'; // Ensure this is renamed if there’s a conflict
 import Header from '../components/Header';
 import './WarrantyRegistration.css'; // Optional: For styling
+import { moveRegistrationToHistory } from '../services/warrantyHistoryService';
+import { useAuth } from '../context/AuthContext';
 
 const WarrantyRegistrationPage: React.FC = () => {
     const { productId } = useParams<{ productId: string }>();
@@ -22,6 +24,7 @@ const WarrantyRegistrationPage: React.FC = () => {
     const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false); // State to show/hide modal
     const [selectedIdToDelete, setSelectedIdToDelete] = useState<string | null>(null); // Store the ID to be deleted
 
+    const { user } = useAuth(); 
     // Fetch all warranty registrations
     const fetchRegistrations = async () => {
         try {
@@ -65,6 +68,22 @@ const WarrantyRegistrationPage: React.FC = () => {
         setShowConfirmModal(true); // Show confirmation modal
     };
 
+    const handleReceiveWarranty = async (registrationId: string) => {
+        try {
+          // Call the API to move the warranty registration to the history
+          await moveRegistrationToHistory(registrationId);
+          
+          // Fetch updated registrations to remove the moved one
+          fetchRegistrations(); 
+          
+          // Optionally, you can also refetch warranty history here if needed
+        } catch (error) {
+          console.error('Error moving registration to warranty history:', error);
+          setErrorMessage('Failed to move warranty registration.');
+        }
+      };
+      
+
     // Perform the delete operation after confirmation
     const confirmDelete = async () => {
         if (!selectedIdToDelete) return; // If there's no selected ID, return
@@ -99,9 +118,17 @@ const WarrantyRegistrationPage: React.FC = () => {
                             <p><strong>Received Date:</strong> {new Date(registration.received_date).toLocaleDateString()}</p>
                             <p><strong>Status:</strong> {registration.current_status}</p>
                             {registration.notes && <p><strong>Notes:</strong> {registration.notes}</p>}
-                            <button onClick={() => handleDeleteClick(registration._id!)} className="delete-button">Xóa</button>
+
+                             {/* Chỉ hiển thị nút "Xóa" nếu user có role "admin" */}
+                          {user?.role === 'admin' && (
+                            <button onClick={() => handleDeleteClick(registration._id!)} className="delete-button">Xóa</button>                           
+                            )}
+                           
                             
-                            <button className ='btn btn-success'>Nhận bảo hành</button>
+                          {/* Chỉ hiển thị nút "Nhận bảo hành" nếu user có role "staff_technical" */}
+                          {user?.role === 'staff technical' && (
+                                <button className='btn btn-success' onClick={() => handleReceiveWarranty(registration._id!)}>Nhận bảo hành</button>
+                            )}
                         </div>
                     ))}
                 </div>
