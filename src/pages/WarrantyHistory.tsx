@@ -77,7 +77,9 @@
         };
     
         const handleCloseModal = () => {
-            setShowActionModal(false); // Đóng modal khi người dùng nhấn đóng
+            setShowActionModal(false);
+            setSelectedHistory(null);
+             // Đóng modal khi người dùng nhấn đóng
         };
     
         const handleSave = () => {
@@ -150,7 +152,6 @@
                             <th>Status Changes</th>
                             <th>Create At</th>
                             <th>Update At</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -165,7 +166,6 @@
                                 </td>
                                 <td>{History.createdAt}</td>
                                 <td>{History.updatedAt}</td>    
-                                <td> <Button variant ="secondary" onClick={() => handleActionClick(History)}>Action</Button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -178,13 +178,13 @@
                     
                 />
 
-                {showActionModal && selectedHistoryId && user && (
+                {/* {showActionModal && selectedHistoryId && user && (
                 <ActionForm
                 warrantyRegisID="warrantyRegisID"
                 onClose={handleCloseModal}
                 onSave={handleSave}
                 />
-            )}
+            )} */}
             </div>
         )
     };
